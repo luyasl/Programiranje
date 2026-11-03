@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -206,40 +206,35 @@ int ProcitajIzDatoteke(listPoli P, char* dat)
 int Ispis(listPoli P)
 {
     listPoli temp = P->Next;
-
-    printf("\nIspis liste:\n");
-
-    while (temp != NULL) {
-        printf("%d %d\n", temp->Koef, temp->Pot);
-        temp = temp->Next;
-    }
-
-    printf("\nIspis polinoma:\n");
-
-    temp = P->Next;
-
-    if (temp == NULL) {
-        printf("0\n");
-        return 0;
-    }
-
     int prvi = 1;
 
-    while (temp != NULL) {
-        if (temp->Koef == 0) {
+    printf("\nPolinom: ");
+
+    while (temp != NULL)
+    {
+        if (temp->Koef == 0)
+        {
             temp = temp->Next;
             continue;
         }
 
-        if (temp->Koef > 0 && !prvi)
-            printf(" + ");
-
+        if (!prvi)
+        {
+            if (temp->Koef > 0)
+                printf(" + ");
+            else
+                printf(" - ");
+        }
         else if (temp->Koef < 0)
-            printf(" - ");
+        {
+            printf("-");
+        }
 
-        printf("%d", abs(temp->Koef));
+        if (abs(temp->Koef) != 1 || temp->Pot == 0)
+            printf("%d", abs(temp->Koef));
 
-        if (temp->Pot > 0){
+        if (temp->Pot > 0)
+        {
             printf("x");
 
             if (temp->Pot > 1)
@@ -257,6 +252,7 @@ int Ispis(listPoli P)
 
     return 0;
 }
+
 
 void ObrisiListu(listPoli P)
 {
